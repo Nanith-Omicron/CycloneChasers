@@ -65,14 +65,14 @@ namespace CycloneChasers
             caca.AddComponent(trackright);
 
             caca.pos = new Vector2(300, 300);
-            caca.spd = new Vector2(0, 1);
+  
             bots.Add(caca);
 
 
             Bot caca1 = new Bot("Brama");
             var ba1 = new Component(caca, Component.componentType.hull_base, 20, Content.Load<Texture2D>("hull_base"), "Box Of Pain");
 
-            var cap1 = new Component(caca, Component.componentType.hull_turret, 35, Content.Load<Texture2D>("hull_turrent"), "Cringe cap");
+            var cap1 = new Component(caca, Component.componentType.hull_turret, 35, Content.Load<Texture2D>("Piss-mk1"), "Cringe cap");
 
             var dog1 = new Component(caca, Component.componentType.sensor, 12, Content.Load<Texture2D>("simple_camera"), "Dog Nose");
             var trackleft1 = new Component(caca, Component.componentType.wheel, 35, Content.Load<Texture2D>("tanktrack-1"), "Tank wheel");
@@ -95,9 +95,9 @@ namespace CycloneChasers
             caca1.AddComponent(trackright1);
 
             caca1.pos = new Vector2(300, 100);
-            caca1.spd = new Vector2(0, -1.45f);
-            caca1.rotation = 45;
-            caca1.rotvel = 0.015f;
+        
+           /* caca1.rotation = 45;
+            caca1.rotvel = 0.015f;*/
             bots.Add(caca1);
         }
 
@@ -127,30 +127,98 @@ namespace CycloneChasers
             var qq = Keyboard.GetState();
             // TODO: Add your update logic here
 
-            if (qq.IsKeyDown(Keys.D))
+         /*   if (qq.IsKeyDown(Keys.D))
             {
                 bots[0].rotation += .02f;
-                bots[0].vel *= 0.88f;
+                bots[0].spd.Y *= 0.88f;
             }
             else
             if (qq.IsKeyDown(Keys.A))
             {
                 bots[0].rotation -= .02f;
-                bots[0].vel *= 0.88f;
+                bots[0].spd.Y *= 0.88f;
             }
 
             if (qq.IsKeyDown(Keys.W))
             {
-                bots[0].vel = -5f;
+                bots[0].spd.Y = -5f;
             }
             else
             if (qq.IsKeyDown(Keys.S))
             {
-                bots[0].vel = 5f;
+                bots[0].spd.Y = 5f;
             }
 
-            bots[0].vel *= 0.6f;
 
+
+
+
+
+            */
+
+
+
+
+
+
+
+
+            if (qq.IsKeyDown(Keys.W))
+            {
+                bots[0].spd.Y =- 10f;
+
+            }
+
+            if (qq.IsKeyDown(Keys.D))
+            {   
+                bots[0].rotvel  += .60f;
+            }
+            if (qq.IsKeyDown(Keys.A))
+            {
+                bots[0].rotvel  -= .6f;
+
+            }
+            if (qq.IsKeyDown(Keys.S))
+            {
+                bots[0].spd.Y = 5f;
+
+            }
+
+            if (qq.IsKeyDown(Keys.Up))
+            {
+                bots[1].spd.Y = -10f;
+
+            }
+
+            if (qq.IsKeyDown(Keys.Right))
+            {
+                bots[1].rotvel += .60f;
+            }
+            if (qq.IsKeyDown(Keys.Left))
+            {
+                bots[1].rotvel -= .6f;
+
+            }
+            if (qq.IsKeyDown(Keys.Down))
+            {
+                bots[1].spd.Y = 5f;
+
+            }
+
+
+
+
+
+
+
+
+            bots[1].spd.Y *= 0.6f;
+            bots[0].spd.Y *= 0.6f;
+
+            bots[1].spd.X *= 0.6f;
+            bots[0].spd.X *= 0.6f;
+            bots[0].rotvel /= 12f;
+            bots[1].rotvel /= 12f;
             base.Update(gameTime);
 
         }
@@ -174,7 +242,7 @@ namespace CycloneChasers
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-
+            
 
             _spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
@@ -185,7 +253,7 @@ namespace CycloneChasers
                 item.DrawBot(_spriteBatch);
             }
             _spriteBatch.End();
-
+            
 
             base.Draw(gameTime);
         }

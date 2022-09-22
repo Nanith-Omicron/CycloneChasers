@@ -74,7 +74,10 @@ namespace CycloneChasers
 
         }
         public Texture2D img;
+
         public Vector2 offset;
+        public Vector2 pos;
+        public Vector2 size;
         public float imgLayer = 0;
         public bool imgflip = false;
 
@@ -115,7 +118,7 @@ namespace CycloneChasers
             logPrefix = "[" + _owner.getName + "] ";
 
         }
-
+        
         public virtual void Initialized()
         {
             _currentHP = HP;
@@ -134,6 +137,23 @@ namespace CycloneChasers
         public virtual void OnBoot()
         {
             if (!isElectrized) { return; }
+        }
+
+        bool AABB(Vector2 a, Vector2 b)
+        {
+            if(a.X > b.X && b.X < a.X  + size.X )
+            {
+                if(a.Y > b.Y)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+            return false;
         }
 
         void electronic()

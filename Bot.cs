@@ -72,9 +72,12 @@ namespace CycloneChasers
                 n.Initialized();
             }
         }
+
+       
+
         public void Update(GameTime gameTime)
         {
-            pos += RotateVectorAround(spd, Vector2.Zero, rotation) * vel;
+            pos += RotateVectorAround(spd, Vector2.Zero, rotation) ;
             rotation += rotvel;
         }
         public void DrawBot(SpriteBatch sb)
@@ -90,7 +93,10 @@ namespace CycloneChasers
                     Vector2 rr = RotateVectorAround(w, pos + new Vector2(50, 45), rot);
 
                     // sb.Draw(item.img, new Rectangle(position.X + item.offset.X, position.Y + item.offset.Y, 100, 100), Color.White,);
-                    sb.Draw(item.img, rr, null, Color.White, rot, new Vector2(0, 0), 3f, item.imgflip ? SpriteEffects.FlipHorizontally : SpriteEffects.None, item.imgLayer);
+                    sb.Draw(item.img, rr, null, Color.White, rot,
+                        new Vector2(0, 0), 3f
+                        , item.imgflip ? SpriteEffects.FlipHorizontally 
+                        : SpriteEffects.None, item.imgLayer);
 
                 }
             }
