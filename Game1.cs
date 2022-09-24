@@ -39,6 +39,9 @@ namespace CycloneChasers
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+            this.IsFixedTimeStep = true;//false;
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1d / 60d);
             Bot caca = new Bot("Ghanais");
             var ba = new Component(caca, Component.componentType.hull_base, 20, Content.Load<Texture2D>("hull_base"), "Box Of Pain");
 
@@ -65,7 +68,7 @@ namespace CycloneChasers
             caca.AddComponent(trackright);
 
             caca.pos = new Vector2(300, 300);
-  
+
             bots.Add(caca);
 
 
@@ -95,9 +98,9 @@ namespace CycloneChasers
             caca1.AddComponent(trackright1);
 
             caca1.pos = new Vector2(300, 100);
-        
-           /* caca1.rotation = 45;
-            caca1.rotvel = 0.015f;*/
+
+            /* caca1.rotation = 45;
+             caca1.rotvel = 0.015f;*/
             bots.Add(caca1);
         }
 
@@ -111,71 +114,60 @@ namespace CycloneChasers
 
         }
 
-        protected override void Update(GameTime gameTime)
+        void huamnInput()
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            mousePos.X = Mouse.GetState().X;
-            mousePos.Y = Mouse.GetState().Y;
-
-            foreach (var item in bots)
-            {
-                item.Update(gameTime);
-            }
-
             var qq = Keyboard.GetState();
             // TODO: Add your update logic here
 
-         /*   if (qq.IsKeyDown(Keys.D))
-            {
-                bots[0].rotation += .02f;
-                bots[0].spd.Y *= 0.88f;
-            }
-            else
-            if (qq.IsKeyDown(Keys.A))
-            {
-                bots[0].rotation -= .02f;
-                bots[0].spd.Y *= 0.88f;
-            }
+            /*   if (qq.IsKeyDown(Keys.D))
+               {
+                   bots[0].rotation += .02f;
+                   bots[0].spd.Y *= 0.88f;
+               }
+               else
+               if (qq.IsKeyDown(Keys.A))
+               {
+                   bots[0].rotation -= .02f;
+                   bots[0].spd.Y *= 0.88f;
+               }
+
+               if (qq.IsKeyDown(Keys.W))
+               {
+                   bots[0].spd.Y = -5f;
+               }
+               else
+               if (qq.IsKeyDown(Keys.S))
+               {
+                   bots[0].spd.Y = 5f;
+               }
+
+
+
+
+
+
+               */
+
+
+
+
+
+
+
 
             if (qq.IsKeyDown(Keys.W))
             {
-                bots[0].spd.Y = -5f;
-            }
-            else
-            if (qq.IsKeyDown(Keys.S))
-            {
-                bots[0].spd.Y = 5f;
-            }
-
-
-
-
-
-
-            */
-
-
-
-
-
-
-
-
-            if (qq.IsKeyDown(Keys.W))
-            {
-                bots[0].spd.Y =- 10f;
+                bots[0].spd.Y = -10f;
 
             }
 
             if (qq.IsKeyDown(Keys.D))
-            {   
-                bots[0].rotvel  += .60f;
+            {
+                bots[0].rotvel += .60f;
             }
             if (qq.IsKeyDown(Keys.A))
             {
-                bots[0].rotvel  -= .6f;
+                bots[0].rotvel -= .6f;
 
             }
             if (qq.IsKeyDown(Keys.S))
@@ -204,21 +196,26 @@ namespace CycloneChasers
                 bots[1].spd.Y = 5f;
 
             }
+        }
 
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
 
+            mousePos.X = Mouse.GetState().X;
+            mousePos.Y = Mouse.GetState().Y;
+            huamnInput();
+            foreach (var item in bots)
+            {
+                item.Update(gameTime);
+                foreach (var otherBots in bots)
+                {
+                    if(item == otherBots)continue;
+                    item.checkForCollision(otherBots);
+                }
+            }
 
-
-
-
-
-
-            bots[1].spd.Y *= 0.6f;
-            bots[0].spd.Y *= 0.6f;
-
-            bots[1].spd.X *= 0.6f;
-            bots[0].spd.X *= 0.6f;
-            bots[0].rotvel /= 12f;
-            bots[1].rotvel /= 12f;
             base.Update(gameTime);
 
         }
@@ -242,7 +239,7 @@ namespace CycloneChasers
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            
+
 
             _spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
 
@@ -253,7 +250,7 @@ namespace CycloneChasers
                 item.DrawBot(_spriteBatch);
             }
             _spriteBatch.End();
-            
+
 
             base.Draw(gameTime);
         }

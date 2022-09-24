@@ -18,6 +18,10 @@ namespace CycloneChasers
         public float rotation;
         public float rotvel = 0f;
 
+
+        public float fricVel = 0.4f;
+        public float fricRot = 0.0833333333f;
+
         String botName = "defaultBot";
 
 
@@ -28,8 +32,6 @@ namespace CycloneChasers
             ID = TotalNumberOfBots++;
             Arbitor.WriteLog(botName + " joined the fight!");
         }
-
-
         public void AddComponent(Component n)
         {
             Arbitor.WriteLog("Adding [" + n.getTypeName + "] " + n.name + " to BOT [" + ID + "]");
@@ -73,13 +75,68 @@ namespace CycloneChasers
             }
         }
 
-       
+        public void AddForce(Vector2 f)
+        {
+            spd += f;
+        }
+        public void checkForCollision(Bot other)
+        {
+            // This is the routine for collision.
+            // Currently, this check for every component on this bots
+            // and check if there's a contact. For now component aren;'t
+            // pixelPerfect
+            foreach (var mine in _components)
+            {
+                if (!mine.hasCollision)
+                {
+                    // If collision isn't enabled on this component
+                    // skip.
+                    continue;
+                }
+
+
+                foreach (var others in other._components)
+                {
+                    //Sanity Check just in case
+                    // We shouldn't have our own components check against each other                   
+                    if (others == mine)
+                    {
+                        continue;
+                    }
+                    bool collisionOccured = mine.CollideWith(others.getPos);
+                    others.hadCollision = collisionOccured;
+                    mine.hadCollision = collisionOccured;
+                    if (collisionOccured)
+                    {
+                        Vector2 delta = mine.getPos - others.getPos;
+                        mine.addForce(delta);
+                        others.addForce(-delta);
+                    }
+
+
+                }
+            }
+
+        }
 
         public void Update(GameTime gameTime)
         {
-            pos += RotateVectorAround(spd, Vector2.Zero, rotation) ;
+
+            foreach (var item in _components)
+            {
+                item.Update();
+            }
+
+            spd *= (1 - fricVel);
+            rotvel *= fricRot;
+
+            pos += RotateVectorAround(spd, Vector2.Zero, rotation);
             rotation += rotvel;
+
+            // Friction. May change based on the ground
+
         }
+
         public void DrawBot(SpriteBatch sb)
         {
 
@@ -88,14 +145,21 @@ namespace CycloneChasers
 
                 if (item.img != null)
                 {
-                    Vector2 w = (pos + item.offset);
+                    Vector2 w = item.getPos;
                     var rot = rotation;
-                    Vector2 rr = RotateVectorAround(w, pos + new Vector2(50, 45), rot);
-
+                    Vector2 rr = RotateVectorAround(w, pos + new Vector2(50, 45), item.rot);
+                    item.rot = rotation;
                     // sb.Draw(item.img, new Rectangle(position.X + item.offset.X, position.Y + item.offset.Y, 100, 100), Color.White,);
-                    sb.Draw(item.img, rr, null, Color.White, rot,
+                    Color toUse = Color.White;
+
+                    if (item.hadCollision)
+                    {
+                        toUse = Color.Red;
+                    }
+
+                    sb.Draw(item.img, rr, null, Color.White, item.rot,
                         new Vector2(0, 0), 3f
-                        , item.imgflip ? SpriteEffects.FlipHorizontally 
+                        , item.imgflip ? SpriteEffects.FlipHorizontally
                         : SpriteEffects.None, item.imgLayer);
 
                 }

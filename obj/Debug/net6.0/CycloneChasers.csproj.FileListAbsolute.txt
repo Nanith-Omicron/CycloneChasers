@@ -31,3 +31,4 @@
 /home/nanith/CycloneChasers/obj/Debug/net6.0/CycloneChasers.pdb
 /home/nanith/CycloneChasers/obj/Debug/net6.0/CycloneChasers.genruntimeconfig.cache
 /home/nanith/CycloneChasers/obj/Debug/net6.0/ref/CycloneChasers.dll
+/home/nanith/CycloneChasers/bin/Debug/net6.0/Content/Piss-mk1.xnb

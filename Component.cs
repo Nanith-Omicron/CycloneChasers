@@ -74,10 +74,12 @@ namespace CycloneChasers
 
         }
         public Texture2D img;
+        public Vector2 pos, offset, spd;
+        public float rotSpd, rot;
+        public bool hasCollision = true;
 
-        public Vector2 offset;
-        public Vector2 pos;
-        public Vector2 size;
+
+        Vector2 size;
         public float imgLayer = 0;
         public bool imgflip = false;
 
@@ -101,7 +103,19 @@ namespace CycloneChasers
         bool _broken = false;
 
         bool _hidden = false;
+public bool hadCollision = false;
 
+        public Vector2 getPos
+        {
+            get
+            {
+                if (_owner != null)
+                {
+                    pos = _owner.pos + offset;
+                }
+                return pos;
+            }
+        }
         public void setHidden(bool x)
         {
             _hidden = x;
@@ -118,7 +132,7 @@ namespace CycloneChasers
             logPrefix = "[" + _owner.getName + "] ";
 
         }
-        
+
         public virtual void Initialized()
         {
             _currentHP = HP;
@@ -130,28 +144,42 @@ namespace CycloneChasers
 
             OnBoot();
         }
-
-        /// <summary>
-        /// Call only on electrized component at its Boot
-        /// </summary>
         public virtual void OnBoot()
         {
             if (!isElectrized) { return; }
         }
 
-        bool AABB(Vector2 a, Vector2 b)
+        public void addForce(Vector2 force)
         {
-            if(a.X > b.X && b.X < a.X  + size.X )
+            if (_owner != null)
             {
-                if(a.Y > b.Y)
+                _owner.AddForce(force);
+            }
+            else
+            {
+                //TODO: ADD FORCE TO COMPONENT BY ITSELF
+            }
+        }
+
+        // Default collideWith is a Simple AABB
+        public virtual bool CollideWith(Vector2 b)
+        {
+            return AABB(b);
+        }
+
+        bool AABB(Vector2 b)
+        {
+            var curPos = getPos;
+            var posX = getPos.X;
+            var posY = getPos.Y;
+
+            if (b.X > posX && b.X < posX + size.X)
+            {
+                if (b.Y > posY && b.Y < posY + size.Y)
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
-                
+                return false;
             }
             return false;
         }
@@ -224,6 +252,10 @@ namespace CycloneChasers
         public void Update()
         {
             electronic();
+            pos += spd;
+            rot += rotSpd;
+            spd *= (1 - 0.4f);
+
         }
 
 
@@ -329,6 +361,7 @@ namespace CycloneChasers
                 Break();
             }
         }
+     
         public void Log(String x)
         {
             Arbitor.WriteLog(logPrefix + _componentName + ": " + x);
