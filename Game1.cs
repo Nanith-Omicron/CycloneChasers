@@ -45,8 +45,8 @@ namespace CycloneChasers
             var cap = new Component(caca, Component.componentType.hull_turret, 35, Content.Load<Texture2D>("hull_turrent"), "Cringe cap");
 
             var dog = new Component(caca, Component.componentType.sensor, 12, Content.Load<Texture2D>("simple_camera"), "Dog Nose");
-            var trackleft = new Component(caca, Component.componentType.wheel, 35, Content.Load<Texture2D>("tanktrack-1"), "Tank wheel");
-            var trackright = new Component(caca, Component.componentType.wheel, 35, Content.Load<Texture2D>("tanktrack-1"), "Tank wheel");
+            var trackleft = new Component(caca, Component.componentType.wheel, 35, Content.Load<Texture2D>("Tanktrack-1"), "Tank wheel");
+            var trackright = new Component(caca, Component.componentType.wheel, 35, Content.Load<Texture2D>("Tanktrack-1"), "Tank wheel");
             var rct = new Component(caca, Component.componentType.battery, 65, Content.Load<Texture2D>("simple_battery"), "Rtc Battery");
 
             cap.offset = new Vector2(4f, 3f);

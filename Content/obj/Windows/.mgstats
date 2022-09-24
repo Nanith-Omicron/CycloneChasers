@@ -1,0 +1,9 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/home/nanith/CycloneChasers/Content/defaultFont.spritefont","/home/nanith/CycloneChasers/Content/bin/Windows/defaultFont.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21535,0.1827294
+"/home/nanith/CycloneChasers/Content/hull_base.png","/home/nanith/CycloneChasers/Content/bin/Windows/hull_base.xnb","TextureProcessor","Texture2DContent",432,4181,0.0443677
+"/home/nanith/CycloneChasers/Content/hull_turrent.png","/home/nanith/CycloneChasers/Content/bin/Windows/hull_turrent.xnb","TextureProcessor","Texture2DContent",477,4181,0.0005604
+"/home/nanith/CycloneChasers/Content/popcorn.png","/home/nanith/CycloneChasers/Content/bin/Windows/popcorn.xnb","TextureProcessor","Texture2DContent",166854,1440085,0.0277159
+"/home/nanith/CycloneChasers/Content/simple_battery.png","/home/nanith/CycloneChasers/Content/bin/Windows/simple_battery.xnb","TextureProcessor","Texture2DContent",348,4181,0.0004241
+"/home/nanith/CycloneChasers/Content/simple_camera.png","/home/nanith/CycloneChasers/Content/bin/Windows/simple_camera.xnb","TextureProcessor","Texture2DContent",231,4181,0.0020989
+"/home/nanith/CycloneChasers/Content/Tanktrack-1.png","/home/nanith/CycloneChasers/Content/bin/Windows/Tanktrack-1.xnb","TextureProcessor","Texture2DContent",342,4181,0.0004105
+"/home/nanith/CycloneChasers/Content/Tanktrack-2.png","/home/nanith/CycloneChasers/Content/bin/Windows/Tanktrack-2.xnb","TextureProcessor","Texture2DContent",336,4181,0.0004018
