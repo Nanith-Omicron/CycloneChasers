@@ -157,12 +157,12 @@ namespace CycloneChasers
 
             if (qq.IsKeyDown(Keys.W))
             {
-                bots[0].spd.Y = -10f;
+                bots[0].spd.Y += -5f;
 
             }
 
             if (qq.IsKeyDown(Keys.D))
-            {
+            { 
                 bots[0].rotvel += .60f;
             }
             if (qq.IsKeyDown(Keys.A))
@@ -172,13 +172,13 @@ namespace CycloneChasers
             }
             if (qq.IsKeyDown(Keys.S))
             {
-                bots[0].spd.Y = 5f;
+                bots[0].spd.Y += 2.5f;
 
             }
 
             if (qq.IsKeyDown(Keys.Up))
             {
-                bots[1].spd.Y = -10f;
+                bots[1].spd.Y += -5f;
 
             }
 
@@ -193,7 +193,7 @@ namespace CycloneChasers
             }
             if (qq.IsKeyDown(Keys.Down))
             {
-                bots[1].spd.Y = 5f;
+                bots[1].spd.Y += 2.5f;
 
             }
         }

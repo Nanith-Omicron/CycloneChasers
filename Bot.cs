@@ -10,6 +10,19 @@ namespace CycloneChasers
 {
     internal class Bot
     {
+
+        private static Texture2D _blankTexture;
+
+        public static Texture2D BlankTexture(SpriteBatch s)
+        {
+            if (_blankTexture == null)
+            {
+                _blankTexture = new Texture2D(s.GraphicsDevice, 1, 1);
+                _blankTexture.SetData(new[] { Color.White });
+            }
+            return _blankTexture;
+        }
+
         const float MINIMUM_HP = 0.5f;
         public static UInt16 TotalNumberOfBots = 0;
         public Vector2 pos;
@@ -108,9 +121,13 @@ namespace CycloneChasers
                     mine.hadCollision = collisionOccured;
                     if (collisionOccured)
                     {
-                        Vector2 delta = mine.getPos - others.getPos;
-                        mine.addForce(delta);
-                        others.addForce(-delta);
+                        Vector2 delta = (mine.getPos - others.getPos) * .25f;
+                        delta += (spd * mine.getWeight - other.spd * others.getWeight) * .01f;
+                        // AddForce(delta/2);
+                        // other.AddForce(-delta/2);
+                        spd = delta;
+                        other.spd = -delta;
+
                     }
 
 
@@ -157,7 +174,18 @@ namespace CycloneChasers
                         toUse = Color.Red;
                     }
 
-                    sb.Draw(item.img, rr, null, Color.White, item.rot,
+
+                    sb.Draw(Bot.BlankTexture(sb), rr,
+                    new Rectangle((int)pos.X + (int)item.offset.X +
+                    (int)item.size.X / 2,
+                    (int)pos.Y + (int)item.offset.Y + (int)item.size.Y / 2,
+                     (int)item.size.X, (int)item.size.Y),
+                    Color.Blue * 0.4f, item.rot,
+                      new Vector2(item.offset.X, item.offset.Y), 3f
+                      , item.imgflip ? SpriteEffects.FlipHorizontally
+                      : SpriteEffects.None, 1);
+
+                    sb.Draw(item.img, rr, null, toUse, item.rot,
                         new Vector2(0, 0), 3f
                         , item.imgflip ? SpriteEffects.FlipHorizontally
                         : SpriteEffects.None, item.imgLayer);

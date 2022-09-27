@@ -79,7 +79,7 @@ namespace CycloneChasers
         public bool hasCollision = true;
 
 
-        Vector2 size;
+        public Vector2 size = new Vector2(20, 20);
         public float imgLayer = 0;
         public bool imgflip = false;
 
@@ -103,7 +103,7 @@ namespace CycloneChasers
         bool _broken = false;
 
         bool _hidden = false;
-public bool hadCollision = false;
+        public bool hadCollision = false;
 
         public Vector2 getPos
         {
@@ -361,7 +361,7 @@ public bool hadCollision = false;
                 Break();
             }
         }
-     
+
         public void Log(String x)
         {
             Arbitor.WriteLog(logPrefix + _componentName + ": " + x);
