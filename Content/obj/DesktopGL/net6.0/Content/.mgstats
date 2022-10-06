@@ -1,10 +1,10 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/home/nanith/CycloneChasers/Content/defaultFont.spritefont","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/defaultFont.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21535,0.1828405
-"/home/nanith/CycloneChasers/Content/hull_base.png","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/hull_base.xnb","TextureProcessor","Texture2DContent",432,4181,0.0060802
-"/home/nanith/CycloneChasers/Content/hull_turrent.png","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/hull_turrent.xnb","TextureProcessor","Texture2DContent",477,4181,0.0005474
-"/home/nanith/CycloneChasers/Content/Piss-mk1.png","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/Piss-mk1.xnb","TextureProcessor","Texture2DContent",450,4181,0.0004894
-"/home/nanith/CycloneChasers/Content/popcorn.png","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/popcorn.xnb","TextureProcessor","Texture2DContent",166854,1440085,0.0370772
-"/home/nanith/CycloneChasers/Content/simple_battery.png","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/simple_battery.xnb","TextureProcessor","Texture2DContent",348,4181,0.0005635
-"/home/nanith/CycloneChasers/Content/simple_camera.png","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/simple_camera.xnb","TextureProcessor","Texture2DContent",231,4181,0.0004059
-"/home/nanith/CycloneChasers/Content/Tanktrack-1.png","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/Tanktrack-1.xnb","TextureProcessor","Texture2DContent",342,4181,0.0003297
-"/home/nanith/CycloneChasers/Content/Tanktrack-2.png","/home/nanith/CycloneChasers/Content/bin/DesktopGL/Content/Tanktrack-2.xnb","TextureProcessor","Texture2DContent",336,4181,0.0003283
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/defaultFont.spritefont","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/defaultFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21535,0.3046511
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/hull_base.png","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/hull_base.xnb","TextureProcessor","Texture2DContent",432,4181,0.0277437
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/hull_turrent.png","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/hull_turrent.xnb","TextureProcessor","Texture2DContent",477,4181,0.0030173
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/Piss-mk1.png","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/Piss-mk1.xnb","TextureProcessor","Texture2DContent",450,4181,0.0026478
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/popcorn.png","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/popcorn.xnb","TextureProcessor","Texture2DContent",166854,1440085,0.0850016
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/simple_battery.png","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/simple_battery.xnb","TextureProcessor","Texture2DContent",348,4181,0.0027099
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/simple_camera.png","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/simple_camera.xnb","TextureProcessor","Texture2DContent",231,4181,0.0025054
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/Tanktrack-1.png","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/Tanktrack-1.xnb","TextureProcessor","Texture2DContent",342,4181,0.0023555
+"C:/Users/Robotics/source/repos/CycloneChasers/Content/Tanktrack-2.png","C:/Users/Robotics/source/repos/CycloneChasers/Content/bin/DesktopGL/Content/Tanktrack-2.xnb","TextureProcessor","Texture2DContent",336,4181,0.00275

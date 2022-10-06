@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CycloneChasers
 {
-    internal class Bot
+    internal class Bot : Actor
     {
 
         private static Texture2D _blankTexture;
@@ -39,7 +39,7 @@ namespace CycloneChasers
 
 
         public String getName { get { return botName; } }
-        public Bot(String bN)
+        public Bot(String bN,Texture2D t, float lifeTime = 1, Type AiType = Type.Inert, float HP = 10) : base(t)
         {
             botName = bN;
             ID = TotalNumberOfBots++;

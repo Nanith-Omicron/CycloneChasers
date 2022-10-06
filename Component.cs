@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace CycloneChasers
 {
-    internal class Component
+    internal class Component : Image
     {
         public delegate void ComponentDelegate(Component x); // Students can add their special fonction when certain action happens
         public ComponentDelegate OnBreak, OnInitialized, OnTakeDamage, OnRepair;
@@ -39,7 +39,7 @@ namespace CycloneChasers
 
         }
 
-        public Component(Bot owner, componentType ty, float we, Texture2D _img, String nae = "Basic Component", String desc = "", String vend = "")
+        public Component(Bot owner, componentType ty, float we, Texture2D _img, String nae = "Basic Component", String desc = "", String vend = "") : base(_img,nae)
         {
             setOwner(owner);
             img = _img;

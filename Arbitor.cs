@@ -23,8 +23,8 @@ namespace CycloneChasers
         }
 
 
-        Game1 _game;
-        public void setGame(Game1 mg)
+        CORE _game;
+        public void setGame(CORE mg)
         {
             isPresent = true;
             hasGame = true;

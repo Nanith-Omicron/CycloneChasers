@@ -7,10 +7,42 @@ using System.Collections.Generic;
 namespace CycloneChasers
 {
 
-    public class Game1 : Game
+    public class CORE : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        public static GraphicsDeviceManager _graphics;
+        public static SpriteBatch _spriteBatch;
+        public static List<Image> gameObjects = new List<Image>();
+        static Camera camera;
+
+        public static List<Actor> VFX = new List<Actor>();
+        public static List<Actor> Actors = new List<Actor>();
+        public static List<Projectile> OnSCreen = new List<Projectile>();
+
+        int screenHeight, screenWidth;
+
+        public static float InterpolatedGameTime = 0;
+
+
+        [System.Serializable]
+        public class Axis
+        {
+            public float Value;
+            public float Update(float UpdateTime)
+            {
+
+                var A = Positive;
+                var B = Negative;
+                var q = Keyboard.GetState();
+                if (q.IsKeyDown(A)) Value = MathHelper.Lerp(Value, -1, UpdateTime);
+                if (q.IsKeyDown(B)) Value = MathHelper.Lerp(Value, 1, UpdateTime);
+                if (q.IsKeyUp(A) && q.IsKeyUp(B)) Value = MathHelper.Lerp(Value, 0, UpdateTime);
+                return Value;
+            }
+            public Keys Positive, Negative;
+        }
+
+        List<Ianimable> Animator = new List<Ianimable>();
+
         private SpriteFont _defaultSpriteFont;
         public Texture2D lol;
         public Arbitor arbiter;
@@ -24,11 +56,11 @@ namespace CycloneChasers
         int maxBufferSize = 8;
 
         Point mousePos;
-        public Game1()
+        public CORE()
         {
             _graphics = new GraphicsDeviceManager(this);
-
             Content.RootDirectory = "Content";
+
             arbiter = Arbitor.instance;
             Arbitor.instance.setGame(this);
             IsMouseVisible = true;
@@ -42,7 +74,7 @@ namespace CycloneChasers
 
             this.IsFixedTimeStep = true;//false;
             this.TargetElapsedTime = TimeSpan.FromSeconds(1d / 60d);
-            Bot caca = new Bot("Ghanais");
+            Bot caca = new Bot("Ghanais", null);
             var ba = new Component(caca, Component.componentType.hull_base, 20, Content.Load<Texture2D>("hull_base"), "Box Of Pain");
 
             var cap = new Component(caca, Component.componentType.hull_turret, 35, Content.Load<Texture2D>("hull_turrent"), "Cringe cap");
@@ -72,7 +104,7 @@ namespace CycloneChasers
             bots.Add(caca);
 
 
-            Bot caca1 = new Bot("Brama");
+            Bot caca1 = new Bot("Brama", null);
             var ba1 = new Component(caca, Component.componentType.hull_base, 20, Content.Load<Texture2D>("hull_base"), "Box Of Pain");
 
             var cap1 = new Component(caca, Component.componentType.hull_turret, 35, Content.Load<Texture2D>("Piss-mk1"), "Cringe cap");
@@ -162,7 +194,7 @@ namespace CycloneChasers
             }
 
             if (qq.IsKeyDown(Keys.D))
-            { 
+            {
                 bots[0].rotvel += .60f;
             }
             if (qq.IsKeyDown(Keys.A))
@@ -211,7 +243,7 @@ namespace CycloneChasers
                 item.Update(gameTime);
                 foreach (var otherBots in bots)
                 {
-                    if(item == otherBots)continue;
+                    if (item == otherBots) continue;
                     item.checkForCollision(otherBots);
                 }
             }
@@ -236,19 +268,35 @@ namespace CycloneChasers
 
 
         }
+        Color co = Color.White;
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(co);
 
 
-            _spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp);
+            _spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.GetTransform());
 
             _spriteBatch.DrawString(_defaultSpriteFont, bufferLog, new Vector2(0, 300), Color.Green);
+
+            foreach (var item in gameObjects)
+            {
+                if (item != null) _spriteBatch.Draw(item.Texture, item.position, null, Color.White, item.rotation, item.Origin, item.scale, SpriteEffects.None, item.Layer);
+            }
+
+            foreach (var item in Actors)
+                if (item != null && item.IsONScreen())
+                    if (item.UseAnimations) item.UpdateAnimations(gameTime);
+                    else _spriteBatch.Draw(item.Texture, item.position, null, item.color, item.rotation, item.Origin, MathHelper.Clamp(item.scale, 0, item.scale), SpriteEffects.None, item.Layer);
+
+            foreach (var item in VFX)
+                if (item != null && item.IsONScreen())
+                    _spriteBatch.Draw(item.Texture, item.position, null, item.color, item.rotation, item.Origin, MathHelper.Clamp(item.scale, 0, item.scale), SpriteEffects.None, item.Layer);
 
             foreach (var item in bots)
             {
                 item.DrawBot(_spriteBatch);
             }
+
             _spriteBatch.End();
 
 
