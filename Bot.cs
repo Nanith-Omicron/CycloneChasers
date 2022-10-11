@@ -37,7 +37,6 @@ namespace CycloneChasers
 
         String botName = "defaultBot";
 
-
         public String getName { get { return botName; } }
         public Bot(String bN,Texture2D t, float lifeTime = 1, Type AiType = Type.Inert, float HP = 10) : base(t)
         {

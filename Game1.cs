@@ -12,6 +12,7 @@ namespace CycloneChasers
         public static GraphicsDeviceManager _graphics;
         public static SpriteBatch _spriteBatch;
         public static List<Image> gameObjects = new List<Image>();
+    
         static Camera camera;
 
         public static List<Actor> VFX = new List<Actor>();
@@ -60,7 +61,7 @@ namespace CycloneChasers
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+           
             arbiter = Arbitor.instance;
             Arbitor.instance.setGame(this);
             IsMouseVisible = true;
@@ -74,7 +75,7 @@ namespace CycloneChasers
 
             this.IsFixedTimeStep = true;//false;
             this.TargetElapsedTime = TimeSpan.FromSeconds(1d / 60d);
-            Bot caca = new Bot("Ghanais", null);
+            Bot caca = new Bot("Ghanais", Content.Load<Texture2D>("hull_base"));
             var ba = new Component(caca, Component.componentType.hull_base, 20, Content.Load<Texture2D>("hull_base"), "Box Of Pain");
 
             var cap = new Component(caca, Component.componentType.hull_turret, 35, Content.Load<Texture2D>("hull_turrent"), "Cringe cap");
@@ -104,7 +105,7 @@ namespace CycloneChasers
             bots.Add(caca);
 
 
-            Bot caca1 = new Bot("Brama", null);
+            Bot caca1 = new Bot("Brama", Content.Load<Texture2D>("hull_base"));
             var ba1 = new Component(caca, Component.componentType.hull_base, 20, Content.Load<Texture2D>("hull_base"), "Box Of Pain");
 
             var cap1 = new Component(caca, Component.componentType.hull_turret, 35, Content.Load<Texture2D>("Piss-mk1"), "Cringe cap");
@@ -134,11 +135,14 @@ namespace CycloneChasers
             /* caca1.rotation = 45;
              caca1.rotvel = 0.015f;*/
             bots.Add(caca1);
+            gameObjects.Add(caca);
+            gameObjects.Add(caca1);
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            camera = new Camera(GraphicsDevice.Viewport);
             lol = Content.Load<Texture2D>("hull_base");
             _defaultSpriteFont = Content.Load<SpriteFont>("defaultFont");
             // TODO: use this.Content to load your game content here
@@ -292,10 +296,10 @@ namespace CycloneChasers
                 if (item != null && item.IsONScreen())
                     _spriteBatch.Draw(item.Texture, item.position, null, item.color, item.rotation, item.Origin, MathHelper.Clamp(item.scale, 0, item.scale), SpriteEffects.None, item.Layer);
 
-            foreach (var item in bots)
+           /* foreach (var item in bots)
             {
                 item.DrawBot(_spriteBatch);
-            }
+            }*/
 
             _spriteBatch.End();
 

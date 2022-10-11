@@ -1,3 +1,3 @@
 ﻿
-using var game = new CycloneChasers.Game1();
+using var game = new CycloneChasers.CORE();
 game.Run();
